@@ -1,7 +1,10 @@
 import React, { useState, useContext, FunctionComponentElement } from 'react';
 import classNames from 'classnames';
+import { CSSTransition } from 'react-transition-group';
 import { MenuContext } from './menu';
 import { MenuItemProps } from './menuItem';
+import Icon from '../Icon/icon';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 
 export interface SubMenuProps {
   index?: string;
@@ -20,7 +23,9 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
 
 
   const classes = classNames('menu-item', 'submenu-item', className, {
-    'is-actived': context.index === index
+    'is-actived': context.index === index,
+    'is-opend': menuOpen,
+    'is-vertical': context.mode === 'vertical',
   })
   /* 这里处理子菜单栏的显示和隐藏 */
   // 点击
@@ -60,15 +65,20 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
       }
     })
     return (
-      <ul className={subMenuClasses}>
-        {childrenComponent}
-      </ul>
+      <CSSTransition
+        in={menuOpen}
+      >
+        <ul className={subMenuClasses}>
+          {childrenComponent}
+        </ul>
+      </CSSTransition>
     )
   }
   return (
     <li key={index} className={classes} {...hoverEvents}>
       <div className='submenu-title' {...clickEvents}>
         {title}
+        <Icon icon={faAngleDown} className="arrow-icon"/>
       </div>
       {renderchildren()}
     </li>

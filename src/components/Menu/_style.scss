@@ -1,4 +1,4 @@
-.menu {
+.yuangb-menu {
   display: flex;
   flex-wrap: wrap;
   padding-left: 0;
@@ -28,6 +28,26 @@
     .submenu-title {
       display: flex;
       align-items: center;
+    }
+    .arrow-icon {
+      margin-top: 3px;
+      margin-left: 3px;
+      transition: transform 0.3s ease-in-out;
+    }
+    &:hover {
+      .arrow-icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  .is-vertical {
+    .arrow-icon {
+      transform: rotate(0deg) !important;
+    }
+  }
+  .is-vertical.is-opend {
+    .arrow-icon {
+      transform: rotate(180deg) !important;
     }
   }
   .submenu {

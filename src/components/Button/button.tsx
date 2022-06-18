@@ -42,7 +42,7 @@ const Button: React.FC<ButtonPorps> = (props) => {
     ...restProps
   } = props
 
-  const classes = classNames('btn', className,{
+  const classes = classNames('yuangb-btn', className,{
     [`btn-${btnType}`]: btnType,
     [`btn-${size}`]: size,
     'disabled': (btnType === ButtonType.Link) && disabled

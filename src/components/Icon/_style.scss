@@ -1,0 +1,16 @@
+@each $key, $value in $theme-colors {
+  .icon-#{$key} {
+    color: $value;
+  }
+}
+
+
+/*
+.icon-primary {
+  color: $primary;
+}
+.icon-secondary {
+  color: $secondary;
+}
+......
+*/

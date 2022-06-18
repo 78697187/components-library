@@ -25,7 +25,7 @@ export const MenuContext = createContext<IMenuContext>({index: "0"});
 const Menu: React.FC<MenuProps> = (props) => {
   const { className, mode, style, children, defaultIndex, onSelect, defaultOpenSubMenus } = props;
   const [ currentActive, setCurrentActive ] = useState(defaultIndex);
-  const classes = classNames('menu', className, {
+  const classes = classNames('yuangb-menu', className, {
     'menu-vertical': mode === 'vertical',
     'menu-horizontal': mode !== 'vertical'
   })

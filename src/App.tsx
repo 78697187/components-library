@@ -1,13 +1,24 @@
 import React from 'react';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+// import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
+library.add(fas);
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 // import Button, { ButtonType, ButtonSize } from './components/Button/button';
 import Menu from './components/Menu/menu';
 import MenuItem from './components/Menu/menuItem';
 import SubMenu from './components/Menu/subMenu';
+import Icon from './components/Icon/icon';
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
+        <Icon icon='coffee' theme={'danger'} size={'10x'}/>
+        <Icon icon='arrow-down' theme={'danger'} size={'10x'}/>
+        <FontAwesomeIcon icon='coffee' size={'4x'}/>
         <Menu defaultOpenSubMenus={['2']} mode={'vertical'} defaultIndex={'0'} onSelect={(index) => {console.log(index)}}>
           <MenuItem>
             cool link
