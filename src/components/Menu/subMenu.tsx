@@ -1,6 +1,7 @@
 import React, { useState, useContext, FunctionComponentElement } from 'react';
 import classNames from 'classnames';
-import { CSSTransition } from 'react-transition-group';
+// import { CSSTransition } from 'react-transition-group';
+import Transition from '../Transition/transition';
 import { MenuContext } from './menu';
 import { MenuItemProps } from './menuItem';
 import Icon from '../Icon/icon';
@@ -46,7 +47,7 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
     onClick: handleClick
   } : {}
   const hoverEvents = context.mode === 'horizontal' ? {
-    onMouseEnter: (e: React.MouseEvent) => { handleMouse(e, true, 200) },
+    onMouseEnter: (e: React.MouseEvent) => { handleMouse(e, true, 300) },
     onMouseLeave: (e: React.MouseEvent) => { handleMouse(e, false, 300)},
   } : {}
 
@@ -65,13 +66,23 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
       }
     })
     return (
-      <CSSTransition
+      <Transition
         in={menuOpen}
+        timeout={300}
+        animation={'zoom-in-top'}
+        // classNames='zoom-in-top'
+        // 第一次执行也运行动画
+        // appear
+        // /*
+        //   当in为true时，包裹的组件才会动态的添加
+        //   当in为false时，包裹的组件将被卸载
+        //  */
+        // unmountOnExit
       >
         <ul className={subMenuClasses}>
           {childrenComponent}
         </ul>
-      </CSSTransition>
+      </Transition>
     )
   }
   return (
