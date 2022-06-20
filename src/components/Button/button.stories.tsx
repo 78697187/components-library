@@ -1,15 +1,3 @@
-// import React from "react";
-// import { storiesOf } from '@storybook/react';
-// import { action } from '@storybook/addon-actions';
-// import Button from "./button";
-
-
-// const defaultButton = () => (
-//   <Button onClick={action('clicked')}>default button</Button>
-// );
-
-// storiesOf('Button Component', module)
-//   .add('默认 Button', defaultButton);
 import React from "react";
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
@@ -59,3 +47,32 @@ Link.args = {
   btnType: 'link',
   children: 'link',
 }
+
+// import React from "react";
+// import { storiesOf } from '@storybook/react';
+// import { action } from '@storybook/addon-actions';
+
+// import Button from "./button";
+
+
+// const defaultButton = () => (
+//   <Button onClick={action('clicked')}>default button</Button>
+// );
+// const buttonWithSize = () => (
+//   <>
+//     <Button size="sm">small button</Button>
+//     <Button size="lg">large button</Button>
+//   </>
+// );
+// const buttonWithType = () => (
+//   <>
+//     <Button btnType='primary'>primary</Button>
+//     <Button btnType='danger'>danger</Button>
+//     <Button btnType='link' href="https://www.baidu.com">link</Button>
+//   </>
+// );
+
+// storiesOf('Button Component', module)
+//   .add('默认 Button', defaultButton)
+//   .add('不同尺寸的 button', buttonWithSize)
+//   .add('不同类型的 button', buttonWithType);

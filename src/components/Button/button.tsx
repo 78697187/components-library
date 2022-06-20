@@ -10,7 +10,7 @@ interface BaseButtonProps {
   disabled?: boolean;
   size?: ButtonSize;
   btnType?: ButtonType;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   href?: string;
 }
 /*
@@ -22,7 +22,7 @@ type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElemen
 /* 问题：将两个属性合并之后，有些button属性又是必须填写的。但是如果是链接，没有这些属性，
   所以使用typescript的Partial，将这些属性都设置成可选的 */
 export type ButtonPorps = Partial<NativeButtonProps & AnchorButtonProps>;
-const Button: React.FC<ButtonPorps> = (props) => {
+export const Button: React.FC<ButtonPorps> = (props) => {
   const {
     btnType,
     className,
