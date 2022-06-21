@@ -7,10 +7,14 @@ export type ButtonSize = 'lg' | 'sm';
 export type ButtonType = 'primary' | 'default' | 'danger' | 'link';
 interface BaseButtonProps {
   className?: string;
+  /** 设置button是否可用 */
   disabled?: boolean;
   size?: ButtonSize;
+  /**
+   * 设置button的类型
+   */
   btnType?: ButtonType;
-  children?: React.ReactNode;
+  // children?: React.ReactNode;
   href?: string;
 }
 /*

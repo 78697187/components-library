@@ -9,6 +9,7 @@ export const parameters = {
       color: /(background|color)$/i,
       date: /Date$/,
     },
+    expended: true
   },
 }
 
@@ -19,6 +20,8 @@ const styles: React.CSSProperties = {
   display: "flex",
   justifyContent: 'center',
   alignContent: 'center',
+  width: '100%',
+  height: '100%',
 }
 const CenterDecorator = (storyFn: any) => <div style={styles}>{storyFn()}</div>
 addDecorator(CenterDecorator);

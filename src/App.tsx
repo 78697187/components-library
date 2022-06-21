@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-// import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
-library.add(fas);
+// import { library } from '@fortawesome/fontawesome-svg-core'
+// import { fas } from '@fortawesome/free-solid-svg-icons'
+// // import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
+// library.add(fas);
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faCoffee } from '@fortawesome/free-solid-svg-icons'
@@ -12,6 +12,7 @@ import MenuItem from './components/Menu/menuItem';
 import SubMenu from './components/Menu/subMenu';
 import Icon from './components/Icon/icon';
 import Transition from './components/Transition/transition';
+import { Input } from './components/Input/input';
 
 
 const App: React.FC = () => {
@@ -19,6 +20,9 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
+        <FontAwesomeIcon icon="magnifying-glass"/>
+        <FontAwesomeIcon icon="magnifying-glass-dollar"/>
+        <Input icon={'magnifying-glass'} size='sm' placeholder='请输入账号'/>
         <Icon icon='coffee' theme={'danger'} size={'10x'}/>
         <Icon icon='arrow-down' theme={'danger'} size={'10x'}/>
         <FontAwesomeIcon icon='coffee' size={'4x'}/>
