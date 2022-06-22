@@ -14,14 +14,14 @@ export const parameters = {
 }
 
 const styles: React.CSSProperties = {
-  // textAlign: 'center',
+  textAlign: 'center',
   // marginTop: '100px',
   // marginRight: '200px',
-  display: "flex",
-  justifyContent: 'center',
-  alignContent: 'center',
-  width: '100%',
-  height: '100%',
+  // display: "flex",
+  // justifyContent: 'center',
+  // alignContent: 'center',
+  // width: '100%',
+  // height: '100%',
 }
 const CenterDecorator = (storyFn: any) => <div style={styles}>{storyFn()}</div>
 addDecorator(CenterDecorator);
