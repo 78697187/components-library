@@ -62,14 +62,14 @@ const SimpleComplete = () => {
     return fetch(`https://api.github.com/search/users?q=${query}`)
       .then(res => res.json())
       .then(({ items }) => {
-        console.log(items)
+        // console.log(items)
         return items.slice(0, 10).map((item: any) => ({ value: item.login, ...item}))
       })
   }
   const renderOption = (item: DataSourceType<GithubUserProps>) => {
     return (
       <>
-        <h2>Name: {item.login}</h2>
+        <h6>Name: {item.login}</h6>
         <p>url: {item.url}</p>
       </>
     )
@@ -86,4 +86,5 @@ const SimpleComplete = () => {
 }
 
 // const Template: ComponentStory<typeof AutoComplete> = (args) => <AutoComplete {...args}></AutoComplete>;
+/** 当前实例默认从github上请求数据 */
 export const autoComplete: ComponentStory<typeof AutoComplete> = SimpleComplete.bind({});
