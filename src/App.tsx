@@ -13,6 +13,7 @@ import SubMenu from './components/Menu/subMenu';
 import Icon from './components/Icon/icon';
 import Transition from './components/Transition/transition';
 import { Input } from './components/Input/input';
+import Upload from './components/Upload/upload';
 
 
 const App: React.FC = () => {
@@ -20,6 +21,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
+        <Upload action='http://jsonplaceholder.typicode.com/posts'/>
         <FontAwesomeIcon icon="magnifying-glass"/>
         <FontAwesomeIcon icon="magnifying-glass-dollar"/>
         <Input icon={'magnifying-glass'} size='sm' placeholder='请输入账号'/>
