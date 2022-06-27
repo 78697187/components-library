@@ -21,7 +21,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <Upload action='http://jsonplaceholder.typicode.com/posts'/>
+        {/* <Upload action='http://jsonplaceholder.typicode.com/posts'/> */}
         <FontAwesomeIcon icon="magnifying-glass"/>
         <FontAwesomeIcon icon="magnifying-glass-dollar"/>
         <Input icon={'magnifying-glass'} size='sm' placeholder='请输入账号'/>

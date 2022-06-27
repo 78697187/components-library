@@ -3,6 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { action } from '@storybook/addon-actions';
 
 import Upload, { UploadFile } from "./upload";
+import Icon from "../Icon/icon";
 
 
 const defaultFileList: UploadFile[] = [
@@ -36,5 +37,18 @@ DefaultUpload.args = {
   // onSuccess: action('success'),
   // onError: action('error'),
   // beforeUpload: checkFileSize,
-  defaultFileList: defaultFileList,
+  // defaultFileList: defaultFileList,
+  name: 'fileName',
+  data: {'yuan': 'guangbin'},
+  headers: {'X-Powered-By': 'yuan'},
+  // accept: '.jpg',
+  multiple: true,
+  drag: true,
+  children: (
+    <>
+      <Icon icon='upload' size='5x' theme='secondary'/>
+      <br/>
+      <p>Drag file over to upload</p>
+    </>
+  )
 }
