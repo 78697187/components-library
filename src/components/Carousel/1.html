@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      li {
+        list-style: none;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .focus {
+        position: relative;
+        width: 550px;
+        height: 204px;
+        /* overflow: hidden; */
+        /* margin: 100px auto; */
+      }
+
+      .img {
+        width: 400%; /* 拷贝之后图片列表中有6张图片，将ul的宽设置为600%，从而使所有图片都在同一行上*/
+        position: absolute;
+        top: 0;
+        left: 0;
+        /* z-index: -1; */
+      }
+
+      .img li {
+        float: left;
+        width: 550px;
+        height: 204px;
+      }
+      img {
+        height: 204px;
+        width: 100%;
+      }
+
+      /* .pointer {
+        position: absolute;
+        bottom: 12px;
+        left: 320px;
+      } */
+
+      .pointer li {
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 5px;
+        width: 18px;
+        height: 18px;
+        background-color: white;
+        opacity: 0.3;
+        border-radius: 50%;
+      }
+
+      /* .current {
+        opacity: 1 !important;
+      } */
+    </style>
+  </head>
+  <body>
+    <div class="focus">
+      <ul class="img">
+        <li>
+          <a href="#"
+            ><img
+              src="http://p1.music.126.net/tSI5IA4Q4oB0nN2voDObfA==/109951167605477857.jpg"
+              alt=""
+          /></a>
+        </li>
+        <li>
+          <a href="#"
+            ><img
+              src="http://p1.music.126.net/tSI5IA4Q4oB0nN2voDObfA==/109951167605477857.jpg"
+              alt=""
+          /></a>
+        </li>
+        <li>
+          <a href="#"
+            ><img
+              src="http://p1.music.126.net/tSI5IA4Q4oB0nN2voDObfA==/109951167605477857.jpg"
+              alt=""
+          /></a>
+        </li>
+        <li>
+          <a href="#"
+            ><img
+              src="http://p1.music.126.net/tSI5IA4Q4oB0nN2voDObfA==/109951167605477857.jpg"
+              alt=""
+          /></a>
+        </li>
+      </ul>
+
+      <!--图片控制按钮 -->
+      <ul class="pointer">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </body>
+</html>

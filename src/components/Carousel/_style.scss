@@ -1,0 +1,60 @@
+.yuan-carousel-container {
+  position: relative;
+  width: 550px;
+  height: 204px;
+  overflow: hidden;
+}
+.img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: 0;
+
+  li {
+    list-style: none;
+    float: left;
+    width: 550px;
+    height: 204px;
+
+    img {
+      height: 204px;
+      width: 100%;
+    }
+  }
+}
+.pointer {
+  margin-bottom: 0;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+
+  li {
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 5px;
+    width: 8px;
+    height: 8px;
+    background-color: $gray-700;
+    opacity: 0.8;
+    border-radius: 50%;
+  }
+}
+.arrow-l {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 10px;
+  width: 10px;
+  z-index: 1;
+}
+.arrow-r {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  height: 10px;
+  width: 10px;
+  z-index: 1;
+}
