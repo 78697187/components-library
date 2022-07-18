@@ -14,12 +14,18 @@ import Icon from './components/Icon/icon';
 import Transition from './components/Transition/transition';
 import { Input } from './components/Input/input';
 import Upload from './components/Upload/upload';
+import Carousel from './components/Carousel/Carouselcopy';
 
 
 const App: React.FC = () => {
   const [ show, setShow ] = useState(false);
   return (
     <div className="App">
+      <div style={{"width": "530px", "height": "196px"}}>
+        <Carousel></Carousel>
+        </div>
+
+
       <header className="App-header">
         {/* <Upload action='http://jsonplaceholder.typicode.com/posts'/> */}
         <FontAwesomeIcon icon="magnifying-glass"/>

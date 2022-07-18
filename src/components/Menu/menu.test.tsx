@@ -2,7 +2,7 @@ import React from 'react';
 import { cleanup, fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
 
 import Menu, { MenuProps } from './menu';
-import MenuItem, { MenuItemProps } from './menuItem';
+import MenuItem from './menuItem';
 import SubMenu from './subMenu';
 
 const testProps: MenuProps = {
@@ -77,6 +77,7 @@ describe('test Menu and MenuItem component', () => {
     expect(testProps.onSelect).not.toHaveBeenCalledWith('1');
   })
   it('should render vertical mode when is set to vertical', () => {
+    // 手动清除前面的beforeEach的节点
     cleanup()
     const wrapper = render(generateMenu(testVerProps));
     const menuElement = wrapper.getByTestId('test-menu');

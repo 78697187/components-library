@@ -1,5 +1,4 @@
 import React from "react";
-
 import classNames from "classnames";
 
 export type ButtonSize = 'lg' | 'sm';
@@ -12,6 +11,7 @@ interface BaseButtonProps {
   size?: ButtonSize;
   /**
    * 设置button的类型
+   * type是原生属性
    */
   btnType?: ButtonType;
   // children?: React.ReactNode;
@@ -38,6 +38,7 @@ export const Button: React.FC<ButtonPorps> = (props) => {
   } = props
 
   const classes = classNames('yuangb-btn', className,{
+    // key是变化的，采用中括号写法
     [`btn-${btnType}`]: btnType,
     [`btn-${size}`]: size,
     'disabled': (btnType === 'link') && disabled

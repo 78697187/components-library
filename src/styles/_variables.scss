@@ -45,7 +45,7 @@ $theme-colors:
   'dark': $dark,
 ) !default;
 
-/* 主要字体家族 */
+/* 主要字体家族  */
 $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 /* 等宽字体，对代码的展示有更大的优势 */
 $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
@@ -82,6 +82,7 @@ $h6-font-size: $font-size-base  !default;
 // 链接
 $link-color: $primary  !default;
 $link-decoration: none !default;
+/* darken() 让颜色变暗 */
 $link-hover-color: darken($link-color, 15%) !default;
 $link-hover-decoration: underline !default;
 $link-disabled-decoration: line-through !default;

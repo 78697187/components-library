@@ -5,6 +5,9 @@ import { MenuItemProps } from './menuItem';
 
 export type MenuMode = 'horizontal' | 'vertical';
 type SelectCallback = (selectedIndex: string) => void
+// interface SelectCallback {
+//   (selectedIndex: string) :void
+// }
 export interface MenuProps {
   defaultIndex?: string;
   className?: string;
@@ -14,6 +17,7 @@ export interface MenuProps {
   children?: React.ReactNode;
   defaultOpenSubMenus?: string[];
 }
+// Context的形状
 interface IMenuContext {
   index: string;
   onSelect?: SelectCallback;
@@ -23,7 +27,15 @@ interface IMenuContext {
 
 export const MenuContext = createContext<IMenuContext>({index: "0"});
 const Menu: React.FC<MenuProps> = (props) => {
-  const { className, mode, style, children, defaultIndex, onSelect, defaultOpenSubMenus } = props;
+  const {
+    className,
+    mode,
+    style,
+    children,
+    defaultIndex,
+    onSelect,
+    defaultOpenSubMenus
+  } = props;
   const [ currentActive, setCurrentActive ] = useState(defaultIndex);
   const classes = classNames('yuangb-menu', className, {
     'menu-vertical': mode === 'vertical',
@@ -37,6 +49,7 @@ const Menu: React.FC<MenuProps> = (props) => {
     }
   }
 
+  // 传递给子组件的context
   const passedContext: IMenuContext = {
     index: currentActive ? currentActive : "0",
     onSelect: handleClick,
@@ -45,9 +58,11 @@ const Menu: React.FC<MenuProps> = (props) => {
   }
   const renderChildren = () => {
     return React.Children.map(children, (child, index) => {
+      // child为React.ReactNode类型，没有type属性
       const childElement = child as React.FunctionComponentElement<MenuItemProps>
       const { displayName } = childElement.type;
       if(displayName === 'MenuItem'  || childElement.type.displayName === 'SubMenu') {
+        // 给子组件自动添加index属性
         return React.cloneElement(childElement, {
           index: index.toString()
         });

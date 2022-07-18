@@ -16,10 +16,10 @@ export default {
   }
 } as ComponentMeta<typeof Carousel>;
 
-const Template: ComponentStory<typeof Carousel> = (args) => (<div style={{"width": "530px", "height": "196px"}}><Carousel {...args}></Carousel></div>)
+const Template: ComponentStory<typeof Carousel> = (args) => (<div style={{"width": "550px", "height": "224"}}><Carousel {...args}></Carousel></div>)
 
 export const DefaultCarousel = Template.bind({});
 
 DefaultCarousel.args = {
-  'height': 196,
+  list: list,
 }

@@ -1,60 +1,83 @@
-.yuan-carousel-container {
+.yuan-carousel {
+  // 定位左右箭头
   position: relative;
-  width: 550px;
-  height: 204px;
   overflow: hidden;
-}
-.img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding-left: 0;
 
-  li {
-    list-style: none;
-    float: left;
-    width: 550px;
-    height: 204px;
+  .arrow-left {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-55%);
+    left: 5px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    color: aliceblue;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    background-color: rgba($color: gray, $alpha: .3);
+    border-radius: 50%;
+    display: none;
+  }
 
-    img {
-      height: 204px;
-      width: 100%;
+  .arrow-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-55%);
+    right: 5px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    color: aliceblue;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    background-color: rgba($color: gray, $alpha: .3);
+    border-radius: 50%;
+    display: none;
+  }
+
+  &:hover {
+    .arrow-left, .arrow-right {
+      display: block;
     }
   }
 }
-.pointer {
-  margin-bottom: 0;
+
+.container {
+  // float: left;
+  display: flex;
+  position: relative;
+}
+
+.carousel-dots {
+  display: flex;
+  list-style: none;
   position: absolute;
-  bottom: 0;
+  margin-bottom: 0px;
+  bottom: 5px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1;
 
-  li {
-    cursor: pointer;
-    display: inline-block;
-    margin-right: 5px;
-    width: 8px;
-    height: 8px;
-    background-color: $gray-700;
-    opacity: 0.8;
+  .carousel-dot {
+    // display: block;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
+    background-color: rgba($color: gray, $alpha: .8);
+    margin: 0 5px;
+
+    &.is-actived {
+      background-color: lighten($color: $cyan, $amount: 25%);
+    }
   }
 }
-.arrow-l {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 10px;
-  width: 10px;
-  z-index: 1;
+
+
+img {
+  width: 530px;
 }
-.arrow-r {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 0;
-  height: 10px;
-  width: 10px;
-  z-index: 1;
+
+.trans {
+  transition: transform 1s ease-in;
 }

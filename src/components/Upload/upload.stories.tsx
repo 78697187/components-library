@@ -33,6 +33,7 @@ const Template: ComponentStory<typeof Upload> = (args) => <Upload {...args}></Up
 export const DefaultUpload = Template.bind({});
 DefaultUpload.args = {
   action: 'http://jsonplaceholder.typicode.com/posts',
+  // action: 'http://localhost:3000/upload',
   onProgress: action('progress'),
   onSuccess: action('success'),
   onError: action('error'),
@@ -44,6 +45,7 @@ DefaultUpload.args = {
 export const DragUpload = Template.bind({});
 DragUpload.args = {
   action: 'http://jsonplaceholder.typicode.com/posts',
+  // action: 'http://localhost:3000/upload',
   // onProgress: action('progress'),
   // onSuccess: action('success'),
   // onError: action('error'),
