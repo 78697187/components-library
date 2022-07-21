@@ -44,6 +44,17 @@ export const Input: React.FC<InputProps> = (props) => {
     style,
     ...restProps
   } = props
+  // 在将input设置为受控组件的时候， 如果没有给useState赋初值，或者初值为null, react会报错
+  const fixControlledValue = (value: any) => {
+    if(typeof value === 'undefined' || value === null) {
+      return '';
+    }
+    return value;
+  }
+  // value和defaultValue同时存在会报错
+  if('value' in props) {
+    delete restProps.defaultValue;
+  }
 
   // 根据属性计算不同的 calssName
   const classes = classNames('yuangb-input-wrapper', className, {

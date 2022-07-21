@@ -59,12 +59,10 @@ export const Carousel: React.FC<CarouselProps> = (props) => {
   const [ currentIndex, setCurrentIndex ] = useState<number>(0);
   const [ carouselWidth, setCarouselWidth ] = useState<number>(0);
   // const [ transX, setTransX ] = useState<number>(0);
-  const [ timerState, setTimer ] = useState<NodeJS.Timer>();
-
-
+  // const [ timerState, setTimer ] = useState<NodeJS.Timer>();
+  const timerRef = useRef<NodeJS.Timer>();
   const carouselRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  // const timerRef = useRef<NodeJS.Timer || null>();
 
   useEffect(() => {
     if(carouselRef.current) {
@@ -73,6 +71,7 @@ export const Carousel: React.FC<CarouselProps> = (props) => {
   }, [])
 
   const prev = () => {
+    // console.log('prev')
     setCurrentIndex((prevIndex) => {
       if(prevIndex === 0) {
         return list.length - 1;
@@ -83,6 +82,7 @@ export const Carousel: React.FC<CarouselProps> = (props) => {
   }
 
   const next = () => {
+    // console.log('next')
     setCurrentIndex((prevIndex) => {
       if(prevIndex === list.length) {
         return 0;
@@ -97,35 +97,34 @@ export const Carousel: React.FC<CarouselProps> = (props) => {
   }
 
   const handleMouseEnter = () => {
-    clearInterval(timerState);
-    setTimer(undefined);
+    // console.log('handleMouseOver');
+    clearInterval(timerRef.current);
+    timerRef.current = undefined;
   }
+
   const handleMouseLeave = () => {
-    let timer: NodeJS.Timer;
+    // console.log('handleMouseLeave');
     if(autoplay) {
-      timer = setInterval(() => {
+      timerRef.current = setInterval(() => {
         next();
       }, interval);
-      setTimer(timer);
     }
   }
 
   // 是否自动播放
   useEffect(() => {
-    let timer: NodeJS.Timer;
     if(autoplay) {
-      timer = setInterval(() => {
+      timerRef.current = setInterval(() => {
         next();
       }, interval);
-      setTimer(timer);
     }
     return function() {
       // 清除的是State中保存的定时器，因为中途如果鼠标放到了轮播图上，新开的定时器就变了。导致组件卸载的时候没有清除掉开着的定时器
       // clearInterval(timer);
-      clearInterval(timerState);
-      setTimer(undefined)
+      clearInterval(timerRef.current);
+      timerRef.current = undefined;
     }
-  },[autoplay, interval, next])
+  },[])
 
   const wrapperStyle = {
     width: `${list.length}00%`,
@@ -180,7 +179,7 @@ export const Carousel: React.FC<CarouselProps> = (props) => {
 
 Carousel.defaultProps = {
   autoplay: true,
-  interval: 3000,
+  interval: 2000,
 }
 
 export default Carousel;

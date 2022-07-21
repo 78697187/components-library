@@ -25,6 +25,7 @@ module.exports = {
           "{}": false
         }
       }
-    ]
+    ],
+    "react/no-children-prop": "off",
   }
 };

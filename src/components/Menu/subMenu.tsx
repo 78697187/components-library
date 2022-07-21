@@ -15,7 +15,12 @@ export interface SubMenuProps {
 }
 
 const SubMenu: React.FC<SubMenuProps> = (props) => {
-  const { index, title, children, className} = props;
+  const {
+    index,
+    title,
+    children,
+    className
+  } = props;
   const context = useContext(MenuContext);
   const openSubMenus = context.defaultOpenSubMenus as Array<string>;
   /* 以下逻辑是在menu在vertical状态下默认展开子菜单 */
@@ -46,6 +51,7 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
   const clickEvents = context.mode === 'vertical' ? {
     onClick: handleClick
   } : {}
+  // 根据menu的Mode，判断传入的鼠标事件
   const hoverEvents = context.mode === 'horizontal' ? {
     onMouseEnter: (e: React.MouseEvent) => { handleMouse(e, true, 300) },
     onMouseLeave: (e: React.MouseEvent) => { handleMouse(e, false, 300)},

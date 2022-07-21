@@ -20,7 +20,7 @@ export type DataSourceType<T = {}> = Partial<T & DataSourceObject>
 
 export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
   /** 通过输入的字符串，获取、处理数据的函数 */
-  fetchSuggestions: (str: string) => DataSourceType[] | Promise<DataSourceType[]>;
+  AjaxSuggestions: (str: string) => DataSourceType[] | Promise<DataSourceType[]>;
   /** 定义选中项的处理函数 */
   onSelect?: (item: DataSourceType) => void;
   /** 自定义数据展示模板，需要返回JSX,
@@ -34,7 +34,7 @@ export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
  */
 export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   const {
-    fetchSuggestions,
+    AjaxSuggestions,
     onSelect,
     renderOption,
     value,
@@ -94,15 +94,18 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   useClickOutside(containerRef, () => {
     setSuggestions([]);
   });
+
   useEffect(() => {
     if(debounceValue && flagSearch.current) {
+      // 先把数据列表清空
       setSuggestions([]);
       // 如果有输入，就请求数据
       console.log('发送请求');
-      const results = fetchSuggestions(debounceValue);
+      const results = AjaxSuggestions(debounceValue);
       // 请求数据时，将loading设为true
       // 对数据的请求分为同步和异步，若是异步返回Promise
       if(results instanceof Promise) {
+        // 异步请求数据
         // 数据请求完成
         setLoading(true);
         results.then(data=> {
@@ -113,9 +116,10 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
           }
         })
       } else {
+        // 同步数据
         // 这句话放在else外面会报类型错误，放在这里面ts自动修改了类型
         setSuggestions(results);
-        setShowDropdown(true);
+        // setShowDropdown(true);
         if(results.length > 0) {
           setShowDropdown(true);
         }
@@ -129,7 +133,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     }
     // 解决上一次搜索结果的高亮显示在新数据中
     setHighLightIndex(-1);
-  }, [debounceValue, fetchSuggestions]);
+  }, [debounceValue, AjaxSuggestions]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();

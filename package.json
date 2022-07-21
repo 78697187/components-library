@@ -26,6 +26,8 @@
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
     "react-transition-group": "^4.4.2",
+    "rehype-highlight": "^5.0.2",
+    "remark-gfm": "^3.0.1",
     "sass": "^1.52.3",
     "sass-loader": "^13.0.0",
     "style-loader": "^3.3.1",
@@ -91,6 +93,7 @@
     "eslint-plugin-storybook": "^0.5.12",
     "jest": "^28.1.1",
     "prop-types": "^15.8.1",
+    "react-markdown": "^8.0.3",
     "webpack": "^5.73.0"
   }
 }

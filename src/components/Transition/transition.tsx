@@ -6,6 +6,10 @@ type AnimationName = 'zoom-in-top' | 'zoom-in-left' | 'zoom-in-bottom' | 'zoom-i
 
 type TransitionProps = CSSTransitionProps & {
   animation?: AnimationName,
+  /**
+   * 当子元素有动画效果时，赋值为ture
+   * 会在子元素外面包裹一层元素，避免动画效果的覆盖
+   */
   wrapper?: boolean,
   children?: React.ReactNode,
 }
