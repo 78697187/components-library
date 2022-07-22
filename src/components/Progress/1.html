@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .text {
+        text-anchor: middle;
+        dominant-baseline: middle;
+      }
+      body {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/200/svg" height="700" width="700">
+      <circle
+        cx="350"
+        cy="350"
+        r="300"
+        fill="none"
+        stroke="gray"
+        stroke-width="40"
+        stroke-linecap="round"
+      />
+      <circle
+        class="progress"
+        transform="rotate(-90, 350, 350)"
+        cx="350"
+        cy="350"
+        r="300"
+        fill="none"
+        storke="blue"
+        stroke-width="20"
+        stroke-linecap="round"
+        stroke-dasharray="10000,11110"
+      />
+      <!-- <text class="text" x="350" y="350" font-size="100" fill="red">36</text> -->
+    </svg>
+    <!-- <script src="./index.js"></script> -->
+  </body>
+</html>

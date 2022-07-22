@@ -30,3 +30,38 @@
     }
   }
 }
+
+.yuan-circle-wrapper {
+  position: relative;
+  display: block;
+  overflow: hidden;
+
+  .circle-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    fill: #000;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-base;
+  }
+
+  .circle-svg {
+    transform: rotate(-90deg);
+    @each $key,$val in $theme-colors {
+      .color-#{$key} {
+        stroke: $val;
+        stroke-linecap: round;
+      }
+    }
+
+    circle {
+      fill: none;
+      transition: stroke-dashoffset 0.3s linear;
+    }
+
+    .circle-bg {
+      stroke: $gray-400;
+    }
+  }
+}

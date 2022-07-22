@@ -15,12 +15,15 @@ import Transition from './components/Transition/transition';
 import { Input } from './components/Input/input';
 import Upload from './components/Upload/upload';
 import Carousel from './components/Carousel/Carouselcopy';
+import Progress from './components/Progress/progress';
 
 
 const App: React.FC = () => {
   const [ show, setShow ] = useState(false);
   return (
     <div className="App">
+      <Progress percent={36} width={200} circle showText theme='danger'></Progress>
+
       <div style={{"width": "530px", "height": "196px"}}>
         <Carousel></Carousel>
         </div>
