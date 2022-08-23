@@ -17,7 +17,9 @@ export interface UploadFile {
   percent?: number;
   /** 源文件 */
   raw?: File;
+  /** 成功的信息 */
   response?: any;
+  /** 失败的信息 */
   error?: any;
 }
 export interface UploadProps {

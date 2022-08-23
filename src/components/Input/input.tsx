@@ -1,4 +1,4 @@
-import React, { ReactElement, InputHTMLAttributes } from "react";
+import React, { ReactElement, InputHTMLAttributes, forwardRef } from "react";
 import classNames from "classnames";
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import Icon from '../Icon/icon';
@@ -21,6 +21,8 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, 'size
   prepend?: string | ReactElement;
   /**添加后缀 用于配置一些固定组合 */
   append?: string | ReactElement;
+  ref?: any;
+  style?: React.CSSProperties;
 }
 
 /**
@@ -32,7 +34,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, 'size
  * ~~~
  * 支持 HTMLInput 的所有基本属性
  */
-export const Input: React.FC<InputProps> = (props) => {
+export const Input: React.FC<InputProps> = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   // 取出各种属性
   const {
     disabled,
@@ -54,6 +56,7 @@ export const Input: React.FC<InputProps> = (props) => {
   // value和defaultValue同时存在会报错
   if('value' in props) {
     delete restProps.defaultValue;
+    restProps.value = fixControlledValue(props.value);
   }
 
   // 根据属性计算不同的 calssName
@@ -73,12 +76,16 @@ export const Input: React.FC<InputProps> = (props) => {
       <input
         className="input-inner"
         disabled={disabled}
+        ref={ref}
         {...restProps}
       />
       {append && <div className="yuan-input-group-append">{append}</div>}
     </div>
   )
-}
+});
+
+Input.displayName = "Input";
+
 Input.defaultProps = {
   size: "sm",
   style: {

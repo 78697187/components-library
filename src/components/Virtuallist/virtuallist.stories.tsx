@@ -28,15 +28,15 @@ export default {
 
 const renderOption = (item: DataSourceType<LakerProps>) => {
   return (
-    <>
-      {item.value}
-    </>
+    <div style={{width: '500px'}}>
+      列表元素 - {item.value}
+    </div>
 
   )
 }
 
 const Template: ComponentStory<typeof VirtualList> = (args) => (
-  <div style={{width: '200px', height:'200px' }}>
+  <div style={{ height:'200px' }}>
     <VirtualList {...args}></VirtualList>
   </div>
 );

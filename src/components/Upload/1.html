@@ -7,10 +7,24 @@
     <title>Document</title>
   </head>
   <body>
-    <input type="date" />
+    <!-- <input type="date" />
     <br />
     <input type="email" />
     <br />
-    <input type="file" />
+    <input type="file" /> -->
+    <!-- 原生表单提交 -->
+    <!-- <div>
+      <form method="post" enctype="multipart/form-data" action="https://www.baidu.com">
+        <input type="file" name="myFile"/>
+        <button type="submit">Submit</button>
+      </form>
+    </div> -->
+    <input type="file" class="fileinput" />
+    <script>
+      let fileinput = document.querySelector(".fileinput");
+      fileinput.addEventListener("change", (e) => {
+        console.log(e.target.files);
+      });
+    </script>
   </body>
 </html>

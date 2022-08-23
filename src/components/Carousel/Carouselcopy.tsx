@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect, Children, useCallback } from "react";
 import classNames from "classnames";
-import { nextTick } from "process";
 
 export type triggerType = 'click' | 'hover';
 export type indicatorPositionType = 'none' | 'outside';

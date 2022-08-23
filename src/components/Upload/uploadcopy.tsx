@@ -165,7 +165,8 @@ export const Upload: React.FC<UploadProps> = (props) => {
     }
     console.log(fileChunks);
     let uploaded = 0;
-    // let failIndex = undefined;
+    let failIndex = undefined;
+    const pool = [];
     for(let index = 0; index < fileChunks.length; index++){
       uploaded = index * chunkSize;
       const formData = new FormData();
@@ -190,7 +191,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
       // }).catch(error => {
       //   console.log('error:', error);
       // });
-      const task = await axios.post(action, formData, {
+      const task = axios.post(action, formData, {
         headers: {
           ...headers,
           'Content-type': 'multipart/form-data'
@@ -198,25 +199,29 @@ export const Upload: React.FC<UploadProps> = (props) => {
         withCredentials,
       })
       console.log(task);
-      // task.then((resp: { data: any; }) => {
-      //   console.log(resp);
-      //   if(index === fileChunks.length) {
-      //     console.log('传输完成');
-      //     updateFileList(_file, {status: 'success', response: resp.data});
-      //   }
-      //   const percent = (uploaded / size);
-      //   console.log(percent);
-      //   if(onSuccess) {
-      //     onSuccess(resp.data, file);
-      //   }
-      //   if(onChange) {
-      //     onChange(file);
-      //   }
-      // }).catch((err: any) => {
-      //   console.log(err);
-      //   failIndex = index;
-      //   console.log(failIndex);
-      // })
+      task.then((resp: { data: any; }) => {
+        console.log(resp);
+        if(index === fileChunks.length) {
+          console.log('传输完成');
+          updateFileList(_file, {status: 'success', response: resp.data});
+        }
+        const percent = (uploaded / size);
+        console.log(percent);
+        if(onSuccess) {
+          onSuccess(resp.data, file);
+        }
+        if(onChange) {
+          onChange(file);
+        }
+      }).catch((err: any) => {
+        console.log(err);
+        failIndex = index;
+        console.log(failIndex);
+      });
+      pool.push(task);
+      if(pool.length === 3) {
+        await Promise.all(pool);
+      }
     }
   }
 
