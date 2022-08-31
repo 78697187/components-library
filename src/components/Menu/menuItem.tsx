@@ -23,7 +23,7 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
       context.onSelect(index);
     }
   }
-
+ 
   return (
     <li className={classes} style={style} onClick={handleClick}>
       {children}

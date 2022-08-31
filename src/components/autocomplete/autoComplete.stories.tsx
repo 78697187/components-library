@@ -96,16 +96,33 @@ const handleFetch = (query: string) => {
       return items.slice(0, 10).map((item: any) => ({ value: item.login, ...item}))
     })
 }
+
+const itemStyle = {
+  display: 'flex',
+  justifyContent: 'space-between'
+}
+const hStyle = {
+  width: '80px',
+  TextAlign: 'start',
+  WhiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis'
+}
+const pStyle = {
+  WhiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis'
+}
 const renderOption = (item: DataSourceType<GithubUserProps>) => {
   return (
-    <>
-      <h6>Name: {item.login}</h6>
-      <p>url: {item.url}</p>
-    </>
+    <div style={itemStyle}>
+      <h6 style={hStyle}>{item.login}</h6>
+      <a style={pStyle}>url: {item.url}</a>
+    </div>
   )
 }
 
-const Template: ComponentStory<typeof AutoComplete> = (args) => <AutoComplete {...args}></AutoComplete>;
+const Template: ComponentStory<typeof AutoComplete> = (args) => <AutoComplete style={{width: '500px'}} {...args}></AutoComplete>;
 
 export const DemoautoComplete = Template.bind({});
 DemoautoComplete.args = {

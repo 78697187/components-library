@@ -27,6 +27,7 @@ const Transition: React.FC<TransitionProps> = (props) => {
       classNames={ classNames ? classNames : animation }
       {...restProps}
     >
+      {/* CSSTransition已经对child做了验证，验证是否是一个合法的child */}
       {wrapper ? <div>{children}</div> : children}
       {/* {children} */}
     </CSSTransition>

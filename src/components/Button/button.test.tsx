@@ -2,7 +2,7 @@ import React from "react";
 import { render, fireEvent } from '@testing-library/react';
 import Button, { ButtonPorps} from './button';
 const defaultProps = {
-  onClick: jest.fn() // jest提供模拟函数调用的方法
+  onClick: jest.fn() // jest提供模拟函数调用的方法 , 用来追踪函数是否被调用，自定义的函数无法追踪
 }
 
 const testProps: ButtonPorps = {
@@ -27,7 +27,8 @@ const disabledProps: ButtonPorps = {
 describe('test Button component', () => {
   it('should render the correct default button', () => {
     const wrapper = render(<Button {...defaultProps}>Nice</Button>);
-    const element = wrapper.getByText('Nice') as HTMLButtonElement;
+    // const element = wrapper.queryByText('Nice')   // HTMLElement | null
+    const element = wrapper.getByText('Nice') as HTMLButtonElement;  // HTMLElement
     expect(element).toBeInTheDocument();
     expect(element.tagName).toEqual('BUTTON');
     expect(element.disabled).toBeFalsy();

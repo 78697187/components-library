@@ -1,4 +1,3 @@
-import { string } from "prop-types";
 import React, { useEffect, useRef, useState, useCallback, ReactElement } from "react";
 import { throttle } from "../utils/throttle";
 
@@ -35,7 +34,7 @@ export const VirtualList: React.FC<VirtualLsitProps> = (props) => {
   const topBlankFill = useRef<topBlankFillProps>();
   const then = useRef<number>(0);
 
-  const changeHeight = useCallback(throttle(() => {
+  const changeHeight = useCallback(() => {
     // 容器高度，通过操作dom元素获取高度是因为它不一定是个定值
     // curContainerHeight.current = containerRef.current.offsetHeight; // 包含了内外边框
     curContainerHeight.current = containerRef.current ? containerRef.current.clientHeight : 0;
@@ -50,7 +49,7 @@ export const VirtualList: React.FC<VirtualLsitProps> = (props) => {
         paddingBottom: `${(dataList.length - 1 - curViewNum.current) * itemHeight}px`,
       }
     }
-  }, 500), [containerRef.current]);
+  }, [containerRef, dataList, itemHeight, showList]);
 
   useEffect(() => {
     // 组件第一次挂载需要初始化容器的高度以及最大容纳值

@@ -13,8 +13,8 @@ import SubMenu from './components/Menu/subMenu';
 import Icon from './components/Icon/icon';
 import Transition from './components/Transition/transition';
 import { Input } from './components/Input/input';
-import Upload from './components/Upload/upload';
-import Carousel from './components/Carousel/Carouselcopy';
+// import Upload from './components/Upload/upload';
+import Carousel from './components/Carousel/Carousel';
 import Progress from './components/Progress/progress';
 
 

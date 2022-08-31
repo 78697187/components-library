@@ -50,12 +50,12 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
   }
   const clickEvents = context.mode === 'vertical' ? {
     onClick: handleClick
-  } : {}
+  } : {};
   // 根据menu的Mode，判断传入的鼠标事件
   const hoverEvents = context.mode === 'horizontal' ? {
     onMouseEnter: (e: React.MouseEvent) => { handleMouse(e, true, 300) },
     onMouseLeave: (e: React.MouseEvent) => { handleMouse(e, false, 300)},
-  } : {}
+  } : {};
 
   const renderchildren = () => {
     const subMenuClasses = classNames('submenu', {

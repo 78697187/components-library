@@ -1,9 +1,11 @@
 import React, { FC } from "react";
 import classNames from "classnames";
+import scopedClass from "../utils/scopedClass";
 
 import Button from "../Button/button";
 import { buildMonths } from "./utils/generator";
 
+const sc = scopedClass('yuan-picker-month');
 export interface MonthOfYear {
   index: number;
   name: string;
@@ -19,7 +21,7 @@ export const MonthPicker: FC<MonthPickerProps> = (props) => {
   const { selectedMonthIndex, onSelect } = props;
 
   return (
-    <table className="yuan-picker-month-wrapper">
+    <table className={sc('wrapper')}>
       <tbody>
         {
           months.map((row: MonthOfYear[], i: number) => (
@@ -29,14 +31,14 @@ export const MonthPicker: FC<MonthPickerProps> = (props) => {
                   const isSelected = month.index === selectedMonthIndex;
                   return (
                     <td
-                      className={classNames('yuan-picker-month-cell', {
-                        'isSelected': isSelected
+                      className={classNames(sc('cell'), {
+                        [`${sc('cell-is-selected')}`]: isSelected
                       })}
                       key={j}
                     >
                       <Button
-                        className={classNames('yuan-picker-month-ghost', {
-                          'isSelected': isSelected
+                        className={classNames(sc('default'), {
+                          [`${sc('is-selected')}`]: isSelected
                         })}
                         btnType='default'
                         onClick={() => onSelect && onSelect(month.index)}

@@ -12,7 +12,7 @@ export interface IconProps extends FontAwesomeIconProps {
   theme?: ThemeProps
 }
 
-const Icon: React.FC<IconProps> = (props) => {
+const Icon: React.FC<IconProps> = React.memo((props: IconProps) => {
    const { className, theme, ...restProps } = props;
    const classes = classNames('yuangb-icon', className, {
     [`icon-${theme}`]: theme
@@ -21,6 +21,8 @@ const Icon: React.FC<IconProps> = (props) => {
    return (
     <FontAwesomeIcon className={classes} {...restProps}/>
    )
-}
+});
+
+Icon.displayName = 'Icon'
 
 export default Icon;

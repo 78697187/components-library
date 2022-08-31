@@ -1,9 +1,9 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useCallback } from "react";
 import classNames from "classnames";
 
 import { MenuItemProps } from './menuItem';
 
-export type MenuMode = 'horizontal' | 'vertical';
+export type MenuMode = 'horizontal' | 'vertical';  // 字符串字面量
 type SelectCallback = (selectedIndex: string) => void
 // interface SelectCallback {
 //   (selectedIndex: string) :void
@@ -42,12 +42,13 @@ const Menu: React.FC<MenuProps> = (props) => {
     'menu-horizontal': mode !== 'vertical'
   })
 
-  const handleClick = (index: string) => {
+  // 避免context.provider的value值改变，导致所有消费value值的子组件产生不必要的渲染
+  const handleClick = useCallback((index: string) => {
     setCurrentActive(index);
     if(onSelect) {
       onSelect(index);
     }
-  }
+  }, [onSelect]);
 
   // 传递给子组件的context
   const passedContext: IMenuContext = {
@@ -67,7 +68,7 @@ const Menu: React.FC<MenuProps> = (props) => {
           index: index.toString()
         });
       } else {
-        console.error("wraning: Menu has a child which is not a MenuItem");
+        console.error("wraning: Menu has a child which is not a MenuItem or SubMenu");
       }
     })
   }

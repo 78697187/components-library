@@ -66,7 +66,7 @@ export const Input: React.FC<InputProps> = forwardRef<HTMLInputElement, InputPro
     'input-group': prepend || append,
     'input-group-append': !!append,
     'input-group-prepend': !!prepend,
-  })
+  });
 
   return (
     // 根据属性判断是否要添加特定的节点

@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Carousel from "./Carouselcopy";
+import Carousel from "./Carousel";
 
 const list = [
   { url: 'http://p1.music.126.net/IXb-PeUMyeFDA1KHQraF4Q==/109951167605258627.jpg'},

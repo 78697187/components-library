@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { ChangeEvent, useRef, useState } from "react";
+import React, { ChangeEvent, useCallback, useRef, useState } from "react";
 import axios from 'axios';
 
 import Button from '../Button/button';
@@ -27,15 +27,20 @@ export interface UploadProps {
   defaultFileList?: UploadFile[];
   /** 文件上传的生命周期函数， 在文件上传之前对文件进行处理。 如： 检查文件大小 */
   beforeUpload?: (file: File) => boolean | Promise<File>;
+  /** 文件上传的生命周期函数， 在文件上传过程中的回调函数。 */
   onProgress?: (percentage: number, file: File) => void;
+  /** 文件上传的生命周期函数， 在文件上传之后的回调函数。 */
   onSuccess?: (data: any, file: File) => void;
+  /** 文件上传的生命周期函数， 文件上传失败的回调函数。 */
   onError?: (err: any, file: File) => void;
+  /** 文件上传的生命周期函数， 文件上传成功或失败之后的回调函数。 */
   onChange?: (file: File) => void;
   onRemove?: (file: UploadFile) => void;
   /** 自定义post请求头
    *  默认携带'Content-type': 'multipart/form-data'
   */
   headers?: {[key: string]: any};
+  /** 自定义传输给服务器数据的name */
   name?: string;
   data?: {[key: string]: any};
   /** 表示跨域请求时是否携带cookie， 默认不携带 */
@@ -102,25 +107,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
       fileInput.current.value='';
     }
   }
-  // 定义上传文件的方法
-  const uploadFiles = (files: FileList) => {
-    const postFiles = Array.from(files);
-    postFiles.forEach(file => {
-      if(!beforeUpload){
-        post(file);
-      } else {
-        const result = beforeUpload(file);
-        if(result && result instanceof Promise){
-          result.then(processedFile => {
-            post(processedFile);
-          })
-        } else if(result !== false) {
-          post(file);
-        }
-      }
-    })
-  }
-  const post = (file: File) => {
+  const post = useCallback((file: File) => {
     const _file: UploadFile = {
       uid: Date.now() + `${file.name}`,
       status: 'ready',
@@ -130,7 +117,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
       raw: file,
     }
     // 这里有bug，传入多个文件时， 只显示最后一个， 这是setState的问题
-    // setFileList([_file, ...fileList]);
+    // setFileList([_file, ...fileList]);  // 闭包
     setFileList(prevList => [_file, ...prevList])
     const formData = new FormData();
     formData.append(name || 'file', file);
@@ -146,10 +133,10 @@ export const Upload: React.FC<UploadProps> = (props) => {
       },
       withCredentials,
       onUploadProgress: (e) => {
-        console.log(e)
+        // console.log(e)
         const percentage = Math.round((e.loaded / e.total) * 100) || 0;
         if (percentage < 100) {
-          updateFileList(_file, { percent: percentage, status: 'uploading'});
+          updateFileList(_file, { percent: percentage, status: 'uploading' });
           if(onProgress) {
             onProgress(percentage, file)
           }
@@ -174,17 +161,39 @@ export const Upload: React.FC<UploadProps> = (props) => {
         onChange(file);
       }
     })
-  }
+  }, [action, data, headers, name, onChange, onError, onProgress, onSuccess, withCredentials])
+  // 定义上传文件的方法
+  const uploadFiles = useCallback((files: FileList) => {
+    const postFiles = Array.from(files);
+    postFiles.forEach(file => {
+      if(!beforeUpload){
+        post(file);
+      } else {
+        const result = beforeUpload(file);
+        if(result && result instanceof Promise){
+          result.then(processedFile => {
+            post(processedFile);
+          })
+        } else if(result !== false) {
+          post(file);
+        }
+      }
+    })
+  }, [beforeUpload, post])
 
   // 删除逻辑
-  const handleMove = (file: UploadFile) => {
+  const handleMove = useCallback((file: UploadFile) => {
     setFileList(prevList =>
       prevList.filter(item => item.uid !== file.uid)
     )
     if(onRemove) {
       onRemove(file);
     }
-  }
+  }, [onRemove]);
+
+  const onFile = useCallback((files: FileList) => {
+    uploadFiles(files)
+  }, [ uploadFiles ])
 
   return (
     <div
@@ -197,7 +206,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
         {
           drag ?
           <Dragger
-            onFile={ files => uploadFiles(files) }
+            onFile={ onFile }
           >{children}</Dragger> : children
         }
       </div>

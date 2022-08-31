@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, createContext, FC, useRef } from "react";
+import React, { useState, ChangeEvent, createContext, FC, useRef, memo } from "react";
 import useClickOutside from "../../hooks/useClickOutside";
 import Input from "../Input/input";
 import Transition from "../Transition/transition";
@@ -6,6 +6,7 @@ import { SelectOptionProps } from "./selectOption";
 
 
 export interface SelectProps {
+  /**  */
   disabled?: boolean;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   children?: React.ReactNode;
@@ -24,7 +25,7 @@ interface ISelectedContext {
 }
 export const SelectContext = createContext<ISelectedContext>({index: "0"});
 
-export const Select: FC<SelectProps> = (props) => {
+export const Select: FC<SelectProps> = memo((props: SelectProps) => {
   const {
     disabled,
     children,
@@ -92,7 +93,9 @@ export const Select: FC<SelectProps> = (props) => {
         </SelectContext.Provider>
       </div>
   )
-}
+})
+
+Select.displayName = 'Select';
 
 Select.defaultProps = {
   disabled: false,

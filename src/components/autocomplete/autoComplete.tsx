@@ -1,5 +1,5 @@
 
-import React, { ChangeEvent, KeyboardEvent, useState, ReactElement, useEffect, useRef } from "react";
+import React, { ChangeEvent, KeyboardEvent, useState, ReactElement, useEffect, useRef, useCallback, memo } from "react";
 import classNames from "classnames";
 import Input, { InputProps } from '../Input/input';
 import Icon from '../Icon/icon';
@@ -14,7 +14,7 @@ interface DataSourceObject {
   value: string;
 }
 
-// 这里如果不用partial会报错。 因为&表示两种类型中共有的属性。 而DataSourceObject只有value
+// 这里如果不用partial会报错。 因为&表示两种类型的联合类型。 而DataSourceObject只有value
 export type DataSourceType<T = {}> = Partial<T & DataSourceObject>
 // export type DataSourceType<T = {}> = T & DataSourceObject
 
@@ -32,7 +32,7 @@ export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
 /**
  * AutoComplete 是一个带提示的文本输入框，用户可以自由输入，关键词是辅助输入。
  */
-export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
+export const AutoComplete: React.FC<AutoCompleteProps> = memo((props: AutoCompleteProps) => {
   const {
     AjaxSuggestions,
     onSelect,
@@ -95,6 +95,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     setSuggestions([]);
   });
 
+  // 数据的请求可以看作是inputvalue改变的副作用
   useEffect(() => {
     if(debounceValue && flagSearch.current) {
       // 先把数据列表清空
@@ -142,7 +143,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     flagSearch.current = true;
   }
 
-  const handleSelect = (item: DataSourceType) => {
+  const handleSelect = useCallback((item: DataSourceType) => {
     setInputValue(item.value || '');
     setShowDropdown(false);
     if(onSelect) {
@@ -150,14 +151,14 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     }
     // 选择操作不需要重新发送请求
     flagSearch.current = false;
-  }
+  }, [ onSelect ]);
 
-  const highlight = (index: number) => {
+  const highlight = useCallback((index: number) => {
     if(index < 0) index = suggestions.length-1;
     if(index >= suggestions.length) index = 0;
     setHighLightIndex(index);
-  }
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+  }, [ suggestions ])
+  const handleKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
     // keyCode属性已弃用
     console.log(e.code);
     switch(e.code) {
@@ -180,7 +181,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
       default:
         break;
     }
-  }
+  }, [ highlightIndex, suggestions, handleSelect, highlight ])
 
   // value 和 defaultValue同时存在于props中会报错
   if('value' in props) {
@@ -198,7 +199,10 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
       { dom }
     </div>
   )
-}
+});
+
+AutoComplete.displayName = 'AutoComplete';
+
 AutoComplete.defaultProps = {
   icon: 'search',
 }

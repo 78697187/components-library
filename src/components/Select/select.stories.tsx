@@ -6,6 +6,8 @@ import Option from "./selectOption";
 export default {
   title: 'Select',
   component: Select,
+  argTypes: {
+  }
 } as ComponentMeta<typeof Select>;
 
 const BaseSelect = () => {

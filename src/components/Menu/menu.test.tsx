@@ -88,14 +88,14 @@ describe('test Menu and MenuItem component', () => {
     const dropdownElement = wrapper.getByText('dropdown');
     fireEvent.mouseEnter(dropdownElement);
     await waitFor(() => {
-      // 做异步的原因是因为我们menu的显示加了一个定时器
+      // 做异步的原因是因为我们menu的显示加了一个定时器,是一个异步的操作，而测试代码不是异步的
       expect(wrapper.queryByText('drop1')).toBeVisible();
-    })
+    });
     fireEvent.click(wrapper.getByText('drop1'));
     expect(testProps.onSelect).toHaveBeenCalledWith('3-0');
     fireEvent.mouseLeave(dropdownElement);
     await waitFor(() => {
       expect(wrapper.queryByText('drop1')).not.toBeVisible();
-    })
+    });
   })
-})
+});

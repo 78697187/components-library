@@ -24,6 +24,7 @@
     "date-fns": "^2.29.2",
     "loadsh": "^0.0.4",
     "lodash": "^4.17.21",
+    "node-sass": "^7.0.1",
     "react": "^18.1.0",
     "react-docgen-typescript-loader": "^3.7.2",
     "react-dom": "^18.1.0",
@@ -40,12 +41,14 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "clean": "rimraf ./build",
+    "build-ts": "tsc -p tsconfig.build.json",
+    "build-css": "node-sass ./src/styles/index.scss ./build/index.css",
+    "build": "npm run clean && npm run build-ts",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public",
-    "build-ts": "tsc -p tsconfig.build.json"
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
@@ -97,6 +100,7 @@
     "jest": "^28.1.1",
     "prop-types": "^15.8.1",
     "react-markdown": "^8.0.3",
+    "rimraf": "^3.0.2",
     "webpack": "^5.73.0"
   }
 }

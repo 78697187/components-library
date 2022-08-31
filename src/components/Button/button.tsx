@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import classNames from "classnames";
 
 export type ButtonSize = 'lg' | 'sm';
@@ -26,7 +26,7 @@ type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElemen
 /* 问题：将两个属性合并之后，有些button属性又是必须填写的。但是如果是链接，没有这些属性，
   所以使用typescript的Partial，将这些属性都设置成可选的 */
 export type ButtonPorps = Partial<NativeButtonProps & AnchorButtonProps>;
-export const Button: React.FC<ButtonPorps> = (props) => {
+export const Button: React.FC<ButtonPorps> = forwardRef<HTMLButtonElement, ButtonPorps>((props: ButtonPorps, ref) => {
   const {
     btnType,
     className,
@@ -60,12 +60,15 @@ export const Button: React.FC<ButtonPorps> = (props) => {
         className={classes}
         disabled={disabled}
         {...restProps}
+        ref={ref}
       >
         {children}
       </button>
     )
   }
-}
+})
+
+Button.displayName = 'Button';
 
 Button.defaultProps = {
   disabled: false,

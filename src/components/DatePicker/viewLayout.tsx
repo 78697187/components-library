@@ -1,4 +1,8 @@
 import React, { FC, ReactNode } from "react";
+import scopedClass from "../utils/scopedClass";
+
+const sc = scopedClass('yuan-picker-view-layout');
+
 
 interface HeaderWrap {
   leftElement: ReactNode;
@@ -18,14 +22,14 @@ export const ViewLayout: FC<ViewLayoutProps> = (props) => {
   } = props;
 
   return (
-    <div className="yuan-picker-view-layout">
-      <div className="yuan-picker-view-header">
+    <div className={sc('container')}>
+      <div className={sc('header')}>
         <div>{leftElement}</div>
         <div>{middleElement}</div>
         <div>{rightElement}</div>
       </div>
-      <div className="yuan-picker-view-body">{bodyElement}</div>
-      <div className="yuan-picker-view-footer">{footerElement}</div>
+      <div className={sc('body')}>{bodyElement}</div>
+      <div className={sc('footer')}>{footerElement}</div>
     </div>
   )
 }

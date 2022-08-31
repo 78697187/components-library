@@ -2,10 +2,14 @@ import React, { ChangeEvent, FC, useMemo } from "react";
 import classNames from "classnames";
 import dateFnsIsToday from "date-fns/isToday";
 
+import scopedClass from "../utils/scopedClass";
+
 import { CalendarProps } from './calendar';
 import buildWeeks, { buildDayNames } from "./utils/generator";
 import { getDate, getMonth, isSameDay } from "date-fns";
 import { Button } from "vikingship";
+
+const sc = scopedClass("yuan-date-picker");
 
 export interface CalendarType {
   year: number;
@@ -54,8 +58,8 @@ export const DatePicker: FC<DatePickerProps & CalendarProps> = (props) => {
   }
 
   return (
-    <table className="yuan-day-picker">
-      <thead className="yuan-day-picker-header">
+    <table className={sc('wrapper')}>
+      <thead className={sc('header')}>
         <tr>
           {
             dayNames.map((dayName: string, i: number) => (
@@ -67,10 +71,10 @@ export const DatePicker: FC<DatePickerProps & CalendarProps> = (props) => {
         </tr>
       </thead>
 
-      <tbody className="yuan-day-picker-weeks">
+      <tbody className={'weeks'}>
         {
           weeks.map((week: Date[], i: number) => (
-            <tr key={i} className={"yuan-day-picker-week-item"}>
+            <tr key={i} className={sc('week-item')}>
               {
                 week.map((day: Date, j: number) => {
                   // 目前是当前日期
@@ -81,12 +85,12 @@ export const DatePicker: FC<DatePickerProps & CalendarProps> = (props) => {
                   const isSelected = isSameDay(day, selectedDate);
 
                   return (
-                    <td key={j} className={"yuan-day-picker-day"}>
+                    <td key={j} className={sc('day')}>
                       <Button
-                        className={classNames('yuan-day-picker-ghost', {
-                          'yuan-day-picker-is-today': isToday,
-                          'yuan-day-picker-is-selected': isSelected,
-                          'yuan-day-picker-is-current-month': isCurrentMonth,
+                        className={classNames(sc('default'), {
+                          [`${sc('is-today')}`]: isToday,
+                          [`${sc('is-selected')}`]: isSelected,
+                          [`${sc('is-current-month')}`]: isCurrentMonth,
                         })}
                         btnType='default'
                         onClick={(e) => onSelectDate((e as unknown) as ChangeEvent<HTMLInputElement>, day)}

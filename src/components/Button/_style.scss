@@ -23,9 +23,9 @@
     opacity: $btn-disabled-opacity;
     box-shadow: none;
     // 这个没有效果，如果直接去掉， 上面的cursor: not-allow也会失效
-    // > * {
-    //   pointer-events: none;
-    // }
+    > * {
+      pointer-events: none;
+    }
     pointer-events: none;
   }
 }

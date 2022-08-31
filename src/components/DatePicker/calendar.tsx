@@ -36,7 +36,7 @@ const Carlendar: FC<CalendarProps> = (props) => {
   }
 
   return (
-    <div className="yuan-datepicker" ref={calendarRef}>
+    <div className="yuan-date-picker" ref={calendarRef}>
       {
         isDateView ? (
           <DateView

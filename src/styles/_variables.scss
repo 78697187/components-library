@@ -57,6 +57,7 @@ $font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
 $font-size-lg: $font-size-base * 1.25 !default;
 $font-size-sm: $font-size-base * .875 !default;
 $font-size-root: null !default;
+$font-color: $gray-700 !default;
 
 // 字重
 $font-weight-lighter: lighter !default;
@@ -184,6 +185,10 @@ $box-shadow: 0 .5rem 1rem rgba($black, .15) !default;
 $box-shadow-lg: 0 1rem 3rem rgba($black, .175) !default;
 $box-shadow-inset: inset 0 1px 2px rgba($black, .075) !default;
 
+// padding
+$padding-normal: 1.5rem !default;
+$padding-small: 1rem !default;
+
 // 按钮
 // 按钮基本属性
 $btn-font-weight: 400;
@@ -295,3 +300,9 @@ $progress-bar-transition: width .6s ease !default;
 // select
 $select-hover-active: $gray-300;
 $select-option-list-height: 15rem !default;
+
+// date picker
+$picker-width: 2.4rem !default;
+$picker-height: 2.4rem !default;
+$picker-disabled-color: $gray-300 !default;
+$picker-padding: $padding-small !default;
