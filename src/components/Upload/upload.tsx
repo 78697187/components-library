@@ -55,7 +55,7 @@ export interface UploadProps {
   drag?: boolean;
 }
 
-export const Upload: React.FC<UploadProps> = (props) => {
+export const Upload: React.FC<UploadProps> = React.memo((props: UploadProps) => {
   const {
     action,
     defaultFileList,
@@ -221,12 +221,13 @@ export const Upload: React.FC<UploadProps> = (props) => {
       />
       <UploadList
         fileList={fileList}
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
         onRemove={ handleMove }
       />
     </div>
   )
-};
+});
+
+Upload.displayName = 'Upload';
 
 Upload.defaultProps = {
   name: 'file',

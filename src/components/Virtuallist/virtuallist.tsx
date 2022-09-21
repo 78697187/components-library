@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState, useCallback, ReactElement } from "react";
-import { throttle } from "../utils/throttle";
 
 interface topBlankFillProps {
   paddingTop?: string;
@@ -24,7 +23,7 @@ interface VirtualLsitProps {
 /**
  * VirtualList 的核心思想就是在处理用户滚动时，只渲染列表在可视区域的部分
  */
-export const VirtualList: React.FC<VirtualLsitProps> = (props) => {
+export const VirtualList: React.FC<VirtualLsitProps> = React.memo((props: VirtualLsitProps) => {
   const { itemNumber, itemHeight, dataList = [], renderOption } = props;
 
   const [ showList, setShowList ] = useState<DataSourceType[]>([]);
@@ -40,6 +39,7 @@ export const VirtualList: React.FC<VirtualLsitProps> = (props) => {
     curContainerHeight.current = containerRef.current ? containerRef.current.clientHeight : 0;
     // 列表最大数量，考虑到列表中顶部和底部可能都会出现没有展现完的item
     curViewNum.current = Math.ceil(curContainerHeight.current / itemHeight);
+    // 首屏时，没有滚动鼠标，滚动滑块不显示
     if(showList.length === 0) {
       setShowList(dataList.slice(0, curViewNum.current * 2 - 1));
       topBlankFill.current = {
@@ -64,6 +64,7 @@ export const VirtualList: React.FC<VirtualLsitProps> = (props) => {
 
   const scrollHandle = () => {
     let startIndex = containerRef.current ? Math.floor(containerRef.current.scrollTop / itemHeight) : 0;
+    const paddingTopIndex = startIndex;
     const containerMaxSize = curViewNum.current ? curViewNum.current : 0;
     /**
      * 解决滑动过快出现的白屏问题：注意endIndex要在startIndex人为改变之前就计算好
@@ -77,7 +78,7 @@ export const VirtualList: React.FC<VirtualLsitProps> = (props) => {
       endIndex = currLen - 1;
     }
 
-    // 此处的endIndex是为了在可视区域的上方多出一板数据
+    // 此处的startIndex是为了在可视区域的上方多出一板数据
     // 这里人为的调整startIndex的值，目的就是为了能够在可视区域上方多出一板来当做缓冲区，这样就不会出现滑动到底部，然后请求太慢导致卡在最下面的情况
     if (startIndex <= containerMaxSize) { // containerMaxSize是我们之前计算出来的容器容纳量
       startIndex = 0
@@ -89,7 +90,7 @@ export const VirtualList: React.FC<VirtualLsitProps> = (props) => {
 
     topBlankFill.current = {
       // 起始索引就是可视区第一个元素的索引，索引为多少就代表前面有多少个元素
-      paddingTop: `${startIndex * itemHeight}px`,
+      paddingTop: `${paddingTopIndex * itemHeight}px`,
       // endIndex是我们渲染出来的最后一个元素，可能不在可视区内；用dataListRef最后一个元素的索引与endIndex相减就可以得到还没有渲染元素的数目
       paddingBottom: `${(dataList.length - 1 - endIndex) * itemHeight}px`,
     }
@@ -124,9 +125,9 @@ export const VirtualList: React.FC<VirtualLsitProps> = (props) => {
           {
             showList.map(item => {
               return (
-                  <div className='item' key={`${item}`} style={{height: `${itemHeight}`}}>
-                    { renderTemplate(item) }
-                  </div>
+                <div className='item' key={`${item}`} style={{height: `${itemHeight}`}}>
+                  { renderTemplate(item) }
+                </div>
               )
             })
           }
@@ -134,6 +135,8 @@ export const VirtualList: React.FC<VirtualLsitProps> = (props) => {
       </div>
     </div>
   )
-}
+});
+VirtualList.displayName = 'VirtualList';
+
 
 export default VirtualList;

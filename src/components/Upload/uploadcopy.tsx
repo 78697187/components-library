@@ -163,7 +163,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
         file.slice(cur, cur + chunkSize),
       );
     }
-    console.log(fileChunks);
+    // console.log(fileChunks);
     let uploaded = 0;
     let failIndex = undefined;
     const pool = [];
@@ -198,7 +198,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
         },
         withCredentials,
       })
-      console.log(task);
+      // console.log(task);
       task.then((resp: { data: any; }) => {
         console.log(resp);
         if(index === fileChunks.length) {
